@@ -24,6 +24,7 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 	PlayerInputComponent->BindAxis(TEXT("MoveForward"),this, &ATank::Move);
+	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ATank::Turn);
 
 }
 
@@ -32,5 +33,12 @@ void ATank::Move(float value)
 	UE_LOG(LogTemp,Warning,TEXT("Value : %f"),value);
 	FVector deltaLocation = FVector::ZeroVector;
 	deltaLocation.X = value*_speed * UGameplayStatics::GetWorldDeltaSeconds(this);
-	AddActorLocalOffset(deltaLocation);
+	AddActorLocalOffset(deltaLocation,true);
+}
+
+void ATank::Turn(float value)
+{
+	FRotator deltaRotation = FRotator::ZeroRotator;
+	deltaRotation.Yaw = value * _rotationSpeed * UGameplayStatics::GetWorldDeltaSeconds(this);
+	AddActorLocalRotation(deltaRotation,true);
 }
