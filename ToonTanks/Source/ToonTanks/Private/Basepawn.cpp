@@ -37,10 +37,4 @@ void ABasepawn::Tick(float DeltaTime)
 
 }
 
-// Called to bind functionality to input
-void ABasepawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-}
 
