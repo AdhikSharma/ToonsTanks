@@ -5,6 +5,7 @@
 #include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "DrawDebugHelpers.h"
 
 
 ATank::ATank()
@@ -16,6 +17,32 @@ ATank::ATank()
 	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("Follow Camera"));
 	CameraComp->SetupAttachment(SpringComp);
 
+}
+
+void ATank::BeginPlay()
+{
+	Super::BeginPlay();
+	_playerControllerRef = Cast<APlayerController>(GetController());
+	if (_playerControllerRef)
+	{
+		_playerControllerRef->SetShowMouseCursor(true);
+	}
+	
+}
+
+void ATank::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	if (_playerControllerRef)
+	{
+		FHitResult hitResult;
+		_playerControllerRef->GetHitResultUnderCursor(
+			ECollisionChannel::ECC_Visibility,
+			false,
+			hitResult);
+
+		RotateTurret(hitResult.ImpactPoint);
+	}
 }
 
 

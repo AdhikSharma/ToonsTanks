@@ -16,8 +16,9 @@ public:
 	ABasepawn();
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	void RotateTurret(FVector lookAtTarget);
+
+
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TankMesh", meta = (AllowPrivateAccess = "true"))
@@ -28,10 +29,5 @@ private:
 	UStaticMeshComponent* TurretMesh;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TankMesh", meta = (AllowPrivateAccess = "true"))
 	USceneComponent* ProjectileSpawnPoint;
-
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
 
 };

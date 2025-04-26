@@ -21,6 +21,13 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TankMesh", meta = (AllowPrivateAccess = "true"))
 	class USpringArmComponent* SpringComp;
@@ -32,6 +39,8 @@ private:
 	float _speed = 200.f;
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float _rotationSpeed = 100.f;
+
+	APlayerController* _playerControllerRef;
 
 private:
 	void Move(float value);
