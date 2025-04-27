@@ -26,6 +26,11 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Movement")
 	class UProjectileMovementComponent* _movementComp;
 
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComp,AActor* otherActor, UPrimitiveComponent* otherComp,FVector NormalImpulse,const FHitResult& hit);
+	
+	UPROPERTY(EditAnywhere)
+	float _damage = 50.f;
 
 public:	
 	// Called every frame
