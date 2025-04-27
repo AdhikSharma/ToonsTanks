@@ -28,6 +28,8 @@ private:
 	UFUNCTION()
 	void DamageTaken(AActor* damagedActor,float damageAmt,const UDamageType* damageType,class AController* instigator,AActor* damageCauser);
 
+	class AToonTanksGameMode* _toonTanksGameMode;
+
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;

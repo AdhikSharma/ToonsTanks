@@ -19,14 +19,18 @@ ATank::ATank()
 
 }
 
+void ATank::HandleDestruction()
+{
+	Super::HandleDestruction();
+	SetActorHiddenInGame(true);
+	SetActorTickEnabled(false);
+}
+
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
 	_playerControllerRef = Cast<APlayerController>(GetController());
-	if (_playerControllerRef)
-	{
-		_playerControllerRef->SetShowMouseCursor(true);
-	}
+	
 	
 }
 

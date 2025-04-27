@@ -3,9 +3,11 @@
 
 #include "Basepawn.h"
 #include "Components/CapsuleComponent.h"
-#include "Kismet/GameplayStatics.h"
 #include "DrawDebugHelpers.h"
 #include "Projectile.h"
+#include "GameFramework/DamageType.h"
+#include "Kismet/GameplayStatics.h"
+#include "Camera/CameraShakeBase.h"
 
 // Sets default values
 ABasepawn::ABasepawn()
@@ -23,6 +25,26 @@ ABasepawn::ABasepawn()
 
 	ProjectileSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Spawn Point"));
 	ProjectileSpawnPoint->SetupAttachment(TurretMesh);
+
+}
+
+void ABasepawn::HandleDestruction()
+{
+	//TODO : Visual and sound effects
+	if (_deathParticle) 
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(this, _deathParticle, GetActorLocation(), GetActorRotation());
+	}
+
+	if (_deathParticle) 
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, _deathSound, GetActorLocation(), 1.f, 1.f);
+	}
+
+	if (DeathCameraShakeClass) 
+	{
+		GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(DeathCameraShakeClass);
+	}
 
 }
 

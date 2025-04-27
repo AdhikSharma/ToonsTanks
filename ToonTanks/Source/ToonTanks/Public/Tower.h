@@ -17,6 +17,8 @@ class TOONTANKS_API ATower : public ABasepawn
 public:
 	ATower();
 
+	void HandleDestruction();
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
