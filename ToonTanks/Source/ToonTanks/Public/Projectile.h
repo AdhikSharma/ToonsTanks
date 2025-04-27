@@ -23,6 +23,10 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	UStaticMeshComponent* _projectileMesh;
 
+	UPROPERTY(VisibleAnywhere, Category = "Movement")
+	class UProjectileMovementComponent* _movementComp;
+
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
